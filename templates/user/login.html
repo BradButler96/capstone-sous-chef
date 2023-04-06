@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+
+<div class="container" id="form-container">
+    <h1 class="display-1">Login</h1>
+    <p class="lead">Login below to start cooking!</p>
+
+    <div class="row justify-content-center" style="margin-top: 3rem;">
+        <div class="col-md-8">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <div class="row">
+                    <div class="form-group col-12">
+                        {{ form.username.label(class_="text-info") }}
+                        {{ form.username(class_="form-control form-control") }}
+
+                        {% for error in form.username.errors %}
+                            <span class="form-text text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-12">
+                        {{ form.password.label(class_="text-info") }}
+                        {{ form.password(class_="form-control form-control") }}
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="form-group col-6">
+                        <button class="btn btn-success" style="width:100%">Login</button>
+                    </div>
+                    <div class="form-group col-6">
+                        <a class="btn btn-danger" href="/" style="width:100%">Cancel</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

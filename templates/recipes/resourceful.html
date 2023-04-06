@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Resourceful Recipes{% endblock %}
+
+{% block content %}
+
+<h2 class="display-1" id="resourceful-title">Cook with what you've got!</h2>
+
+
+<div class="row justify-content-center">
+    <input type="text" id="ingredient_0" class="col-6">
+</div>
+
+<div class="row justify-content-center">
+    <button class="btn btn-success col-6" id="add-ingredient-btn">Add Ingredient</button>
+</div>
+
+<div id="added-ingredients-div"></div>
+
+<div id="result-recipes"></div>
+
+{% endblock %}

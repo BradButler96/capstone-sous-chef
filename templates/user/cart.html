@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }} Cart{% endblock %}
+
+
+{% block content %}
+{% if g.user %}
+    <div class="cart-container" id="user-cart">
+        <h1>Your Cart</h1>
+        <table id="cart-table">
+            <tbody id="cart-body"></tbody>
+        </table>
+
+        <span id="user-total"></span>
+
+        <form action="/user/cart/submit">
+            <button type="button" class="submit-order-btn btn btn-success col-3" id="submit-order">Submit Order</button>
+        </form>
+    </div>
+{% else %}
+    <h1>Please login to view your cart!</h1>
+{% endif %}
+
+{% endblock %}

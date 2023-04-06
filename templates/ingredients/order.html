@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Ingredients{% endblock %}
+
+
+{% block content %}
+<h1 class="display-1">Find an Ingredient</h1>
+{% if g.user %}
+    <form method="POST" id="order-form">
+        {{ form.hidden_tag() }}
+        <div class="row justify-content-center">
+            <div class="ingredient-search-input form-group col-6">
+                {{ form.ingredient(class_="form-control form-control") }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group col-12">
+                <button class="ingredient-search-btn btn btn-success col-3">Search</button>
+            </div>
+        </div>
+    </form>
+
+    {% if results %}
+        <div class="ingredient-results-container">
+            {% for ingredient in results %}
+                <div class="order-ingredient card" style="width: 20rem;">
+                    <h3 class="display-6 card-title">{{ ingredient.name|capitalize }}</h3>
+                    <div class="card-body">
+                        <img class="card-img-top" src="https://spoonacular.com/cdn/ingredients_100x100/{{ ingredient.image }}" alt="{{ ingredient.name }}">
+                        <h5 style="display:inline">Price: </h5> <p id="{{ ingredient.id }}-price" style="display:inline">${{ ingredient.price }}</p>
+                        <div>
+                            <input type="button" value="-" class="change-quantity-btn" data-field="quantity">
+                            <input type="number" step="1" max="" value="1" class="ingredient-count" id="{{ ingredient.id }}-count">
+                            <input type="button" value="+" class="change-quantity-btn" data-field="quantity">
+                        </div>
+                        <div class="add-btn-icon">
+                            <button type="button" class="add-to-cart-btn btn btn-sm btn-light" id="{{ ingredient.id }}">Add to Cart</button>
+                            <i class="added-icon text-success fa-regular fa-circle-check" id="{{ ingredient.id }}-added"></i>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% else %}
+    <h1>Please login to order ingredients!</h1>
+{% endif %}
+
+{% endblock %}

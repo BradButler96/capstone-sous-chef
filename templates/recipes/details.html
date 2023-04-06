@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+
+<div id="recipe-details-container">
+    <div class="recipe-div details">
+        <div id="details-header-div">
+            {% if g.user %}
+                <h1 class="recipe-details-title display-3" style="display:inline;">{{ recipe.title }}</h1>          
+                {% if recipe.id in favorites %}
+                    <label for="{{ recipe.id }}-check" id="{{ recipe.id }}-label" class="favorite-label details fa-solid fa-star">
+                        <input class="favorite-check" value="{{ recipe.id }}" type="checkbox" name="{{ recipe.id }}-name" id="{{ recipe.id }}-check" checked> 
+                    </label>
+                {% else %}
+                    <label for="{{ recipe.id }}-check" id="{{ recipe.id }}-label" class="favorite-label details fa-regular fa-star">
+                        <input class="favorite-check" value="{{ recipe.id }}" type="checkbox" name="{{ recipe.id }}-name" id="{{ recipe.id }}-check"> 
+                    </label>
+                {% endif %}
+            {% else %}
+                <h2 class="recipe-details-title">{{ recipe.title }}</h2>
+            {% endif %}
+        </div>
+
+        <div class="details-tags list-group list-group-horizontal-sm">
+            {% for tag in recipe.tags %}
+                {% if recipe.tags[tag] is sameas True %}
+                    <span class="badge rounded-pill bg-info list-group-item">{{ tag }}</span>    
+                {% endif %}
+            {% endfor %}
+        </div>  
+
+        <div class="details-body">
+            <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="details-img">
+            <p class="details-recipe-summary">{{ recipe.summary|safe }}</p>
+        </div>
+
+        <div class="details-info-div">
+            <p><b>Servings:</b> {{ recipe.servings }}</p>
+            <p><b>Ready in:</b> {{ recipe.readyInMinutes }} minutes</p>
+            <p><b>Calories:</b> {{ nutrition.calories }} cal</p>
+        </div>
+
+        <button type="button" class="nutrition-data-btn btn btn-success">Show Nutrition Data</button>
+        <button type="button" class="nutrition-data-btn btn btn-danger" style="display: none;">Hide Nutrition Data</button>
+
+        <div class="nutrition-table-div" style="display: none;">
+            <table class="nutrition-data-table">
+                <tr style="border-bottom: 1px solid #FFFFFF;">
+                    <th><h4>Nutrient</h4></th>
+                    <th><h4>Amount</h4></th>
+                    <th><h4>Daily %</h4></th>
+                </tr>
+                {% for nutrient in nutrition.nutrients|sort(attribute='title') %}
+                    {% if not nutrient.title == 'Calories' %}
+                        <tr>
+                            <td class="{{ nutrient.rating }}-nutrients">{{ nutrient.title }}</td>
+                            <td class="{{ nutrient.rating }}-nutrients">{{ nutrient.amount }}</td>
+                            <td class="{{ nutrient.rating }}-nutrients">{{ nutrient.percentOfDailyNeeds }} %</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="details-ingredients-div col-3"> 
+                <ul>
+                    <h3>Ingredients</h3>
+                    {% for ingredient in recipe.extendedIngredients %}  
+                        <p class="ingredient-item">
+                            <b>{{ ingredient.nameClean.capitalize() }}</b> - {{ ingredient.amount }} {{ ingredient.unit }}
+                        </p>      
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="details-equipment-div col-3">
+                <ul>
+                    <h3>Equipment</h3>
+                    {% for info in recipe.analyzedInstructions %} 
+                        {% for step in info.steps %}
+                            {% for equipment in step.equipment %}
+                                <p class="equipment-item">
+                                    <b>Step {{ step.number }}: </b>{{ equipment.name.capitalize() }}
+                                </p>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="details-instructions-div">
+            <h3>Instructions</h3>
+            <ol>
+                {% for info in recipe.analyzedInstructions %} 
+                    {% for step in info.steps %} 
+                        <li class="details-instruction-steps">{{ step.step }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+<div class="reviews-container">
+    <h2>Reviews</h2>
+
+    {% if user_review %}
+        <div class="review-div card">
+            <div class="card-body">
+                <h3 class="card-title"><img id="review-pfp" src="{{ g.user.profile_pic }}" alt="User Profile Picture"> {{ g.user.username }}</h3>
+                <h6 class="card-subtitle">
+                    {% for i in range(0, user_review.rating) %}
+                        <i class="fa-solid fa-star"></i>
+                    {% endfor %}
+                </h6>
+                <p class="card-text">{{ user_review.comment }}</p>
+            </div>
+        </div>
+    {% else %}
+        {% if g.user %}
+            <div class="review-div card">
+                <div class="card-body">
+                    <h5 class="card-title">Leave a review</h5>
+                    <form action="/review/{{ recipe.id }}/submit" id="review-form">
+                        <div class="rating">
+                            <label id="r1" class="rating-label">            
+                                <input id="i1" class="display-none" type="radio" name="rating" value="1">
+                                <i id="1" class="fa-regular fa-star"></i>
+                            </label>
+                        
+                            <label id="r2" class="rating-label">              
+                                <input id="i2" class="display-none" type="radio" name="rating" value="2">
+                                <i id="2" class="fa-regular fa-star"></i>
+                            </label>
+                        
+                            <label id="r3" class="rating-label">
+                                <input id="i3" class="display-none" type="radio" name="rating" value="3">
+                                <i id="3" class="fa-regular fa-star"></i>
+                            </label class="rating-label">
+                        
+                            <label id="r4" class="rating-label">
+                                <input id="i4" class="display-none" type="radio" name="rating" value="4">
+                                <i id="4" class="fa-regular fa-star"></i>
+                            </label>
+                        
+                            <label id="r5" class="rating-label">
+                                <input id="i5" class="display-none" type="radio" name="rating" value="5">
+                                <i id="5" class="fa-regular fa-star"></i>
+                            </label>
+                        </div>
+
+                        <div class="comments">
+                            <textarea name="comment" id="user-comment" cols="75" rows="5"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <button id="submit-review-btn" class="btn btn-success" style="width:100%">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if user_review %}
+        {% for review in reviews %}
+            {% if (review.id != user_review.user_id) %}
+                <div class="review-div card">
+                    <div class="card-body">
+                        <h3 class="card-title"><img id="review-pfp" src="{{ review.profile_pic }}" alt="User Profile Picture"> {{ review.username }}</h3>
+                        <h6 class="card-subtitle">
+                            {% for i in range(0, review.rating) %}
+                                <i class="fa-solid fa-star"></i>
+                            {% endfor %}
+                        </h6>
+                        <p class="card-text">{{ review.comment }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for review in reviews %}
+            <div class="review-div card">
+                <div class="card-body">
+                    <h3 class="card-title"><img id="review-pfp" src="{{ review.profile_pic }}" alt="User Profile Picture"> {{ review.username }}</h3>
+                    <h6 class="card-subtitle">
+                        {% for i in range(0, review.rating) %}
+                            <i class="fa-solid fa-star"></i>
+                        {% endfor %}
+                    </h6>
+                    <p class="card-text">{{ review.comment }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

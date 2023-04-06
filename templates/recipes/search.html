@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Recipes{% endblock %}
+
+
+{% block content %}
+
+
+<div id="search-recipes-container">
+    {% for recipe in results %}
+        <div class="recipe-div card">
+            <div class="header-div">
+                <a href="/recipes/{{ recipe.id }}" style="text-decoration:none;">
+                    <h2 class="recipe-title">{{ recipe.title }}</h2>
+                </a>
+            </div>
+            <div class="card-body">
+                <a href="/recipes/{{ recipe.id }}" style="text-decoration:none;">
+                    <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width:30rem;">
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

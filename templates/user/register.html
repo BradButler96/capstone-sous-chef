@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Register User{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-md-center">
+    <div class="col-8">
+        <h2 class="display-4">Join Sous Chef today!</h2>
+        <form method="POST" id="user-form">
+            {{ form.hidden_tag() }}
+
+            <div class="row">
+                <div class="form-group col-12">
+                    {{ form.first_name.label(class_="text-info") }}
+                    {{ form.first_name(class_="form-control form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    {{ form.last_name.label(class_="text-info") }}
+                    {{ form.last_name(class_="form-control form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    {{ form.email.label(class_="text-info") }}
+                    {{ form.email(class_="form-control form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    {{ form.username.label(class_="text-info") }}
+                    {{ form.username(class_="form-control form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    {{ form.password.label(class_="text-info") }}
+                    {{ form.password(class_="form-control form-control") }}
+                    <small>6 character minimum</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    {{ form.profile_pic.label(class_="text-info") }}
+                    {{ form.profile_pic(class_="form-control form-control") }}
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="form-group col-6">
+                    <button class="btn btn-success" style="width:100%">Sign me up!</button>
+                </div>
+                <div class="form-group col-6">
+                    <a class="btn btn-danger" href="/" style="width:100%">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+
+{% block content %}
+
+<div>
+    {% if user.id == g.user.id %}
+        <a href="/user/edit" class="card-link text-muted" style="display:inlines; float:right;"><i class="fa-regular fa-pen-to-square"></i></a>
+        <img id="profile-user-pfp" src="{{ user.profile_pic }}" alt="User Profile Picture">
+    {% else %}
+        <img id="profile-user-pfp" src="{{ user.profile_pic }}" alt="User Profile Picture">
+    {% endif %}
+</div>
+<div class="user-info-div card">
+    <div class="card-body">
+        <h1 class="card-title"  style="display:inline;">{{ user.username }}</h1>
+        <h5 class="card-subtitle mb-2 text-light">{{ user.first_name }} {{ user.last_name }}</h5>
+        <h6 class="card-subtitle mb-2 text-light">{{ user.email }}</h6>
+    </div>
+</div>
+
+<div id="user-review-containers">
+    <h2 class="display-3">Reviews</h2>
+    {% for review in reviews %}
+        <div class="review-container">
+            <table>
+                <tr class="review-title-tr">
+                    <td rowspan="3" class="review-img-td"><img id="recipe-review-img" src="{{ review.image }}" alt="{{ review.title }}"></td>
+                    <td class="review-title-td"><h4 class="review-recipe-title card-title">{{ review.title }}</h4></td>
+                </tr>
+                <tr>
+                    <td>
+                        {% for i in range(0, review.rating) %}
+                            <i class="fa-solid fa-star"></i>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="review-comment-td">
+                        {{ review.comment }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    {% endfor %}
+</div>
+
+<div id="favorite-recipes-container">
+    <h2 class="favorite-title display-3">Favorites</h2>
+
+    {% for recipe in recipes|reverse %}
+        <div class="recipe-div profile card">
+            {% if g.user %}
+                <div id="header-div">
+                    <a href="/recipes/{{ recipe.id }}" style="text-decoration:none;" ><h4 class="recipe-title" style="display:inline;">{{ recipe.title }}</h4></a>
+                </div>
+            {% else %}
+                <h4 class="recipe-details-title">{{ recipe.title }}</h4>
+            {% endif %}
+
+            <div class="recipe-card profile card-body">
+                <a href="/recipes/{{ recipe.id }}" style="text-decoration:none"><img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="recipe-img profile"></a>
+                <ul class="recipe-tags profile list-group list-group-horizontal-sm">
+                    {% for tag in recipe.tags %}
+                        {% if recipe.tags[tag] is sameas True %}
+                            <span class="badge bg-info list-group-item" style="margin-bottom: 1rem; margin-right: 1rem; border-radius:0.5rem;">{{ tag }}</span>    
+                        {% endif %}
+                    {% endfor %}
+                </ul>  
+                <p class="favorite-recipe-summary profile">{{ recipe.summary|safe }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

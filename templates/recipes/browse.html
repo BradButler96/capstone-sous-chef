@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Browse Recipes{% endblock %}
+
+{% block content %}
+<h1 class="browse-title display-1">Check these out!</h1>
+
+<div class="dropdown" id="dropdown-div">
+    <button type="button" class="btn btn-light btn-sm dropdown-toggle col-6" data-bs-toggle="dropdown" id="filters-dropdown">Filter Recipes</button>
+    <ul class="dropdown-menu  col-6" id="filters">
+        <form method="POST" id="filter-form">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <li class="filter-options">
+                    {{ field }}
+                </li>   
+                {% endfor %}
+            <center><button type="button" class="btn btn-dark btn-sm col-11" id="submit-filters-btn">Apply Filters</button></center>
+        </form>
+    </ul>
+</div>
+
+
+
+
+{% for recipe in recipes %}
+    <div class="recipe-div card" id="{{ recipe.id }}-card">
+        {% if g.user %}
+            <div class="header-div" id="{{ recipe.id }}-header">
+                <a href="/recipes/{{ recipe.id }}" id="{{ recipe.id }}-link" style="text-decoration:none;">
+                    <button type="button" class="recipe-link-btn btn btn-link" style="text-decoration:none;">
+                        <h2 class="recipe-title" id="{{ recipe.id }}-title">{{ recipe.title }}</h2>
+                    </button>
+                </a>
+                {% if recipe.id in favorites %}
+                    <label for="{{ recipe.id }}-check" class="favorite-label fa-solid fa-star" id="{{ recipe.id }}-label">
+                        <input type="checkbox" value="{{ recipe.id }}" name="{{ recipe.id }}-name" class="favorite-check" id="{{ recipe.id }}-check" checked> 
+                    </label>
+                {% else %}
+                    <label for="{{ recipe.id }}-check" id="{{ recipe.id }}-label" class="favorite-label fa-regular fa-star">
+                        <input type="checkbox" value="{{ recipe.id }}" name="{{ recipe.id }}-name" class="favorite-check" id="{{ recipe.id }}-check"> 
+                    </label>
+                {% endif %}
+            </div>
+        {% else %}
+            <a href="/recipes/{{ recipe.id }}" style="text-decoration:none;" >
+                <h2 class="recipe-details-title">{{ recipe.title }}</h2>
+            </a>
+        {% endif %}
+        <div class="browse-body card-body" id="{{ recipe.id }}-body">
+            <ul class="tags list-group list-group-horizontal-sm" id="{{ recipe.id }}-tags">
+                {% for tag in recipe.tags %}
+                    {% if recipe.tags[tag] is sameas True %}
+                        <span class="recipe-badge badge rounded-pill bg-info list-group-item">{{ tag }}</span>    
+                    {% endif %}
+                {% endfor %}
+            </ul>  
+
+            <a href="/recipes/{{ recipe.id }}" id="{{ recipe.id }}-img-link">
+                <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="browse-img">
+            </a>
+
+            <p class="browse-recipe-summary" id="{{ recipe.id }}-summary">{{ recipe.summary|safe }}</p>
+        </div>
+    </div>
+{% endfor %}
+
+<div>
+    <button class="btn btn-light" id="more-recipes-btn" style="color:#121212">More Recipes</button>
+</div>
+
+
+{% endblock %}

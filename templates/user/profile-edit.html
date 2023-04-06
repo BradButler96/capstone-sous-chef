@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-md-center">
+    <div class="col-6">
+        <h2 class="display-4">Edit profile</h2>
+        <form method="POST" id="edit-user-form">
+            {{ form.hidden_tag() }}
+
+            <div class="row">
+                <div class="form-input-div form-group col-12">
+                    {{ form.first_name.label(class_="text-info") }}
+                    {{ form.first_name(class_="form-control form-control", placeholder=user.first_name) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-input-div form-group col-12">
+                    {{ form.last_name.label(class_="text-info") }}
+                    {{ form.last_name(class_="form-control form-control", placeholder=user.last_name) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-input-div form-group col-12">
+                    {{ form.email.label(class_="text-info") }}
+                    {{ form.email(class_="form-control form-control", placeholder=user.email) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-input-div form-group col-12">
+                    {{ form.username.label(class_="text-info") }}
+                    {{ form.username(class_="form-control form-control", placeholder=user.username) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-input-div form-group col-12">
+                    {{ form.password.label(class_="text-info") }}
+                    {{ form.password(class_="form-control form-control") }}
+                    <small>6 character minimum</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-input-div form-group col-12">
+                    {{ form.profile_pic.label(class_="text-info") }}
+                    {{ form.profile_pic(class_="form-control form-control") }}
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="form-group col-6">
+                    <button class="btn btn-success" style="width:100%">Submit Changes</button>
+                </div>
+                <div class="form-group col-6">
+                    <a class="btn btn-danger" href="/user/{{ g.user.id }}" style="width:100%">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

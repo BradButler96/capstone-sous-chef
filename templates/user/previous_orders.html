@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }} Previous Orders{% endblock %}
+
+
+{% block content %}
+{% if g.user %}
+    <div class="orders-container" id="user-orders">
+        {% for num, order in orders.items() %}
+
+
+            <div id="order-{{ num }}" style="margin-bottom:3rem;">
+                <h2>Order {{ num }}</h2>
+                {% for item in order['items'] %}
+                    <table id="order-{{ num }}-details" style="margin-bottom:1rem;">
+                        <tr>
+                            <td rowspan="5">
+                                <img src="{{ item.image }}" alt="{{ item.name }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>{{ item.name | capitalize}}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>Quantity: {{ item.count }}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>Price: ${{ item.price }}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Total Price: ${{ item.total }}</h5>
+                            </td>
+                        </tr>
+                    </table>
+                {% endfor %}
+                <span>
+                    <h4 style="display:inline;">Order Total: </h4><h5 style="display:inline;">${{ order['total'] }}</h5>
+                </span>
+            </div>
+
+        {% endfor %}
+    </div>
+{% else %}
+    <h1>Please login to view your previous orders!</h1>
+{% endif %}
+
+{% endblock %}

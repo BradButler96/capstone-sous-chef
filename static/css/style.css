@@ -1,0 +1,501 @@
+body {
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+/* Navbar */
+#nav-pfp {
+    text-align: right;
+    width: 6rem;
+    padding-left: 0;
+}
+
+#nav-logout {
+    padding-top:0.65rem;
+    vertical-align: middle;
+
+}
+
+#nav-cart {
+    float: right;
+    font-size: 1.25rem;
+}
+
+.nav-link:hover {
+    color: #121212;
+}
+
+#nav-pfp-img {
+    border-radius: 50%;
+    width: 35%;
+}
+
+.container {
+    align-items: center;
+}
+
+
+/* Homepage */
+#header-div {
+    align-items: center;
+    text-align: center;
+}
+
+.rotate {
+    width: 30rem;
+    border-radius: 50%;
+    animation: rotation 30s infinite linear;
+}
+@keyframes rotation {
+    to {
+      transform: rotate(360deg);
+    }
+}
+
+.feature-description {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: larger;
+    text-align: justify
+}
+
+
+/* Browse Recipes */
+.browse-title {
+    text-align:center;
+}
+
+.recipe-div {
+    background-color: #121212;
+    margin-bottom: 2rem;
+    align-items: center;
+
+}
+
+.recipe-title {
+    color: #FFFFFF;
+    display: inline;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 2.25rem;
+}
+
+.recipe-link-btn {
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.browse-recipe-summary {
+    width: 50rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: larger;
+    text-align: justify;
+}
+
+.browse-body {
+    padding-top: 0;
+    text-align:center
+}
+
+.browse-img {
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tags {
+    justify-content: center;
+}
+
+/* Filter Dropdown */
+#dropdown-div {
+    text-align: center
+}
+
+#filters-dropdown {
+    margin-bottom: 2rem;
+}
+
+#filters {
+    padding: 0;
+}
+
+.form-check-input:checked {
+    background-color:#121212
+}
+
+#submit-filters-btn {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Resourceful Recipes */
+.recipe-div.res {
+    width: 85%;
+    margin: auto
+}
+
+#resourceful-title {
+    text-align: center;
+}
+
+#add-ingredient-btn {
+    margin-top: 1rem;
+}
+
+.ingredient-list {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    font-size:large;
+}
+
+.ingredient-name {
+    display: inline;
+    color: #121212;
+}
+
+.remove-ingredient {
+    display: inline;
+    padding-left: 0.5rem;
+    font-size: medium;
+    color: #121212;
+}
+
+.res-body-div {
+    text-align: center
+}
+
+.res-ingredients-table {
+    width: 85%;
+    margin: auto;
+}
+
+.res-ingredient-list {
+    text-align: center;
+    vertical-align: top;
+}
+
+.res-img {
+    width: 45rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.used-ingredients-list {
+    width: 15rem;
+}
+
+.unused-ingredients-list {
+    width: 15rem;
+}
+
+.missed-ingredients-list {
+    width: 15rem;
+}
+
+#added-ingredients-div {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Details */
+.recipe-div.details {
+    text-align: center;
+}
+.recipe-details-title {
+    margin-bottom: 0;
+}
+
+#details-header-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge {
+    margin-right: 1rem; 
+    font-size: large;
+}
+
+.details-tags{
+    /* margin-top: 1rem; */
+    margin-bottom: 1rem; 
+    justify-content: center;
+}
+
+.details-body {
+    text-align: center;
+}
+
+.details-img {
+    width: 50rem;
+    border-radius: 1rem;
+}
+
+.details-recipe-summary {
+    width: 75rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: larger;
+    text-align: justify;
+    margin-top: 1rem;;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.nutrition-data-table {
+    margin:auto;
+    width: 50%; 
+    margin-bottom:1rem;
+    text-align:center
+}
+
+.nutrition-data-btn {
+    display: block;
+    color:#FFFFFF;
+    width: 40rem;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2rem;
+}
+
+.nutrition-table-div {
+    margin-bottom: 2rem;
+}
+
+.good-nutrients {
+    color: #198754;
+}
+
+.bad-nutrients {
+    color: #dc3545;
+}
+
+.details-instructions-div {
+    text-align: start;
+    width: 100%;
+    float: left;
+}
+
+.details-instruction-steps {
+    margin-bottom: 0.5rem;
+}
+
+.reviews-container {
+    float: left;
+}
+
+/* Substitute Ingredients */
+.sub-btn {
+    margin-top: 1rem;
+}
+
+
+
+
+
+/* Order Ingredients */
+#order-form {
+    text-align: center;
+}
+
+.ingredient-search-input {
+    margin-top: 1rem;
+}
+
+.ingredient-search-btn {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.ingredient-results-container {
+    text-align: center;
+}
+
+.order-ingredient.card {
+    margin: auto;
+}
+
+.ingredient-count {
+    width: 2.5rem;
+    text-align:center;
+}
+
+.ingredient-count::-webkit-outer-spin-button,
+.ingredient-count::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.change-quantity-btn {
+    color:#FFFFFF;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: larger;
+}
+
+.add-btn-icon {
+    margin-top: 1rem;
+}
+
+.add-to-cart-btn{
+    margin-left: 48px;
+}
+
+.added-icon {
+    color: #121212;
+    font-size: 32px;
+    vertical-align: middle;
+    margin-left: 16px;
+    opacity: 0;
+}
+
+/* Cart */
+.delete-btn {
+    float: right;
+}
+
+/* Profile */
+.review-container {
+    width: 75%;
+    margin: auto;
+}
+
+.review-recipe-title {
+    margin-bottom: 0;
+    height: max-content;
+}
+
+.favorite-title {
+    margin-top: 2rem;
+}
+
+.recipe-div.profile {
+    text-align: center;
+}
+
+.recipe-card.profile {
+    width: 75%;
+}
+
+.recipe-tags {
+    justify-content: center;
+}
+
+.recipe-img.profile {
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
+
+.review-img-td {
+    vertical-align: top;
+}
+
+.review-comment-td {
+    text-align: justify;
+}
+
+.favorite-recipe-summary {
+    text-align: justify;
+}
+
+.review-container {
+    margin-bottom: 2rem;
+}
+
+/* Edit User Profile */
+.form-input-div {
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+/* Images */
+#profile-user-pfp {
+    border-radius: 50%;
+    width: 25%;
+    display: inline;
+}
+
+#review-pfp {
+    border-radius: 50%;
+    width: 7.5%;
+}
+
+#recipe-review-img {
+    height: 7.5rem;
+    margin-right: 1rem;
+}
+
+/* Text/Icon */
+/* .fa-regular.fa-star {
+    color: #FFFFFF;
+}
+
+.fa-solid.fa-star {
+    color: #FFFFFF;
+} */
+
+.recipe-badge {
+    margin-bottom: 1rem; 
+    margin-right: 1rem; 
+    border-radius:0.5rem;
+}
+
+/* Misc. */
+
+.favorite-label {
+    color: #FFFFFF;
+    vertical-align: middle;
+    cursor: pointer;
+    display: inline;
+    padding-left: 1rem;
+}
+
+.favorite-check {
+    display: none;
+}
+
+.display-none {
+    display: none;
+}
+
+.delete-btn-icon {
+    color:#FFFFFF;
+}
+
+.delete-btn-icon:hover {
+    color:#dc3545;
+}
+
+/* Info cards */
+
+
+.review-div {
+    background-color: #121212;
+    width: 40rem;
+    margin-bottom: 2rem;
+}
+
+.user-info-div {
+    background-color: #121212;
+    width: 75%;
+    margin-bottom: 2rem;
+}
+
+.order-ingredient {
+    background-color: #121212;
+}
+
+
+
+
+
+
+
+
+
+
