@@ -3,21 +3,22 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from models import db, connect_db, User, Favorite, Review, Order
 from forms import RegisterForm, LoginForm, IngredientSubsForm, EditProfileForm, ShopIngredientsForm, FilterRecipesForm
-from keys import spoonacular_key
+from keys import spoonacular_key, db_url
 import json
 import requests
 import random
 import decimal
-
+import os
 
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sous_chef'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///sous_chef')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', db_url)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-app.config['SECRET_KEY'] = "Sous-Chef"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'Sous-Chef')
 
 connect_db(app)
 db.create_all()
@@ -223,8 +224,6 @@ def load_user_cart():
 
     if len(data) > 0:
         for item in data:
-            print('******************************')
-            print(item)
             res = requests.get(f'https://api.spoonacular.com/food/ingredients/{ item["id"] }/information',
                params={
                 'apiKey': spoonacular_key,
