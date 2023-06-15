@@ -30,13 +30,16 @@
 
 {% if results %}
     <div>
-        <h2>Results</h2>
-        <ol>
-            {% for sub in results.substitutes %}
-                <li>{{ sub }}</li>
-            {% endfor %}
-        </ol>
+        {% if results.status == 'success' %}
+            <h2>Results</h2>
+            <ol>
+                {% for sub in results.substitutes %}
+                    <li>{{ sub }}</li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <h2>Sorry, we couldn't find any substitutes.</h2>
+        {% endif %}
     </div>
 {% endif %}
-
 {% endblock %}

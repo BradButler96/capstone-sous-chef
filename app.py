@@ -600,8 +600,12 @@ def ingredient_subs():
 
         recipe_info = json.loads(res)
 
-        modified_info['ingredient'] = recipe_info['ingredient']
-        modified_info['substitutes'] = recipe_info['substitutes']
+        if recipe_info['status'] == 'success':
+            modified_info['status'] = recipe_info['status']
+            modified_info['ingredient'] = recipe_info['ingredient']
+            modified_info['substitutes'] = recipe_info['substitutes']
+        else:
+            modified_info['status'] = recipe_info['status']
 
     return render_template('ingredients/substitutes.html', form=form, results=modified_info)
 
